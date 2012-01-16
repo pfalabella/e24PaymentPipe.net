@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+# SharpDevelop 4.1.0.8000
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "e24PaymentPipe", "..\e24PaymentPipe.csproj", "{C73C61C1-6FF6-4001-BFE3-57BEE22DD246}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "e24PaymentPipeTests", "..\..\e24PaymentPipeTests\e24PaymentPipeTests.csproj", "{67233D75-3DB4-4EA4-B6C4-CD5A25BE5EE9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C73C61C1-6FF6-4001-BFE3-57BEE22DD246}.Debug|x86.Build.0 = Debug|x86
+		{C73C61C1-6FF6-4001-BFE3-57BEE22DD246}.Debug|x86.ActiveCfg = Debug|x86
+		{C73C61C1-6FF6-4001-BFE3-57BEE22DD246}.Release|x86.Build.0 = Release|x86
+		{C73C61C1-6FF6-4001-BFE3-57BEE22DD246}.Release|x86.ActiveCfg = Release|x86
+		{67233D75-3DB4-4EA4-B6C4-CD5A25BE5EE9}.Debug|x86.Build.0 = Debug|x86
+		{67233D75-3DB4-4EA4-B6C4-CD5A25BE5EE9}.Debug|x86.ActiveCfg = Debug|x86
+		{67233D75-3DB4-4EA4-B6C4-CD5A25BE5EE9}.Release|x86.Build.0 = Release|x86
+		{67233D75-3DB4-4EA4-B6C4-CD5A25BE5EE9}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+EndGlobal
