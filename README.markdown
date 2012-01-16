@@ -36,3 +36,7 @@ catch(BadResponseFromWebServiceException ex)
 Console.WriteLine("paymentID: {0}", paymentdetails.paymentId);
 Console.WriteLine("paymentpage: {0}", paymentdetails.paymentPage);
 ```
+
+License
+-------
+This software is released under the MIT License (see the LICENSE file)
