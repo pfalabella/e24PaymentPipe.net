@@ -7,7 +7,7 @@ Quick start
 ------------
 ```c#
 var paymentServer = new PaymentServerUrlBuilder("bankserver.example.com","/context", UseSSL.on, 443);
-paymentServerUrl = paymentServer.ToUrl();
+Uri paymentServerUrl = paymentServer.ToUrl();
 
 var init=new PaymentInitMessage(
     id: "yourId",
