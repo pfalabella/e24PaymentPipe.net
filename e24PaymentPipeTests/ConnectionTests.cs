@@ -13,7 +13,7 @@ namespace e24PaymentPipeTests
 		[SetUp]
         public void SetUp()
         {
-        	var paymentServer = new PaymentServerUrlBuilder("test4.constriv.com","/cg301", UseSSL.on, 443);
+        	var paymentServer = new PaymentServerUrlBuilder("bankserver.example.com","/context", UseSSL.on, 443);
         	paymentServerUrl = paymentServer.ToUrl();
         }
         
@@ -27,7 +27,7 @@ namespace e24PaymentPipeTests
 
 //			// build Payment Init message
 			var init=new PaymentInitMessage(
-			 	id: "89025555",
+			 	id: "11111111",
 			 	password: "test",
 			 	action: RequiredAction.Authorization,
 			 	amount: 5.30,

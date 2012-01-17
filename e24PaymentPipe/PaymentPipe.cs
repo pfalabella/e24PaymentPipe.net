@@ -85,10 +85,13 @@ namespace e24PaymentPipe
 			{
 				throw new BadResponseFromWebServiceException(response, url.ToString(),initMessage.ToUrlParameters());
 			}
-
-			var parsedrsp=ParseResponse(response);
 			
-			return new PaymentDetails(parsedrsp[0], string.Format("{0}:{1}?PaymentID={2}",parsedrsp[1], parsedrsp[2], parsedrsp[0]));
+			int firstColon = response.IndexOf(":");
+			
+			string pId = response.Substring(0, firstColon);
+			string pPage = response.Substring(firstColon + 1);			
+			
+			return new PaymentDetails(pId, string.Format("{0}?PaymentID={1}",pPage, pId));
 		}
 
 		private Uri BuildUrl(string servletName)
