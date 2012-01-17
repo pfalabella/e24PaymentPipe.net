@@ -16,7 +16,7 @@ namespace e24PaymentPipeTests
  			   	password: "password",
  			    action: RequiredAction.Authorization,
  			    currency: 978,
- 			   	language: AcceptedLanguage.ITA,
+ 			   	language: RequiredLanguage.ITA,
  			   	responseURL: new Uri("http://www.mioserver.it/responseurl"),
  			    errorURL: new Uri("http://www.mioserver.it/errorurl"),
  			   	amount: 33.33, 
@@ -27,7 +27,7 @@ namespace e24PaymentPipeTests
 			Assert.AreEqual("id", pipe.Id);
 			Assert.AreEqual(RequiredAction.Authorization, pipe.RequiredAction);
 			Assert.AreEqual(978, pipe.Currency);
-			Assert.AreEqual(AcceptedLanguage.ITA, pipe.Language);
+			Assert.AreEqual(RequiredLanguage.ITA, pipe.Language);
 			Assert.AreEqual(new Uri("http://www.mioserver.it/responseurl"), pipe.ResponseURL);
 			Assert.AreEqual(new Uri("http://www.mioserver.it/errorurl"), pipe.ErrorURL);
 			Assert.AreEqual(33.33, pipe.Amount);
@@ -43,7 +43,7 @@ namespace e24PaymentPipeTests
  			   	password: "test",
  			    action: RequiredAction.Authorization,
  			    currency: 978,
- 			   	language: AcceptedLanguage.ITA,
+ 			   	language: RequiredLanguage.ITA,
  			   	responseURL: new Uri("http://www.mioserver.com/Receipt.jsp"),
  			   	errorURL: new Uri("http://www.mioserver.com/Error.jsp"),
  			   	amount: 33.33, 

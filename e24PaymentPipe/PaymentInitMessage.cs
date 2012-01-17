@@ -1,69 +1,211 @@
-﻿/*
- * Created by SharpDevelop.
- * User: paolo
- * Date: 11/01/2012
- * Time: 17:13
- * 
- */
-using System;
+﻿using System;
 using System.Globalization;
 using System.Text;
 
 namespace e24PaymentPipe
 {
+	/// <summary>
+	/// Required action for the payment gateway
+	/// </summary>
 	public enum RequiredAction {
+		/// <summary>
+		/// Action "purchase"
+		/// </summary>
 		Purchase=1,
+		
+		/// <summary>
+		/// action to credit back the user with the amount
+		/// </summary>
 		Credit=2,
+		
+		/// <summary>
+		/// action to request an authorization without taking the money
+		/// from the customer's account
+		/// </summary>
 		Authorization=4,
+		
+		/// <summary>
+		/// money will be captured but not taken from the customer's account
+		/// </summary>
 		Capture=5,
+		
+		/// <summary>
+		/// void a transaction
+		/// </summary>
 		Void=9
 	}
 
-	public enum AcceptedLanguage {
+	/// <summary>
+	/// Languages required for the payment page
+	/// (note: not all the payment gateways may support the same languages)
+	/// </summary>
+	public enum RequiredLanguage {
+		/// <summary>
+		/// Italian
+		/// </summary>
 		ITA,
+		
+		/// <summary>
+		/// US English
+		/// </summary>
 		USA,
+		
+		/// <summary>
+		/// French
+		/// </summary>
 		FRA,
+		
+		/// <summary>
+		/// German
+		/// </summary>
 		DEU,
+		
+		/// <summary>
+		/// Spanish
+		/// </summary>
 		ESP,
+		
+		/// <summary>
+		/// Slovenian
+		/// </summary>
 		SLO
 	}
 
 	/// <summary>
-	/// Initialization message for payment
+	/// Initialization message for payment. The class is immutable.
 	/// </summary>
+	/// <example>
+	///<code>
+	///var init=new PaymentInitMessage(
+	///    id: "yourId",
+	///    password: "yourPassword",
+	///    action: RequiredAction.Authorization,
+	///    amount: 5.30,
+	///    language: AcceptedLanguage.ITA,
+	///    responseURL: new Uri("http://www.example.com/TransactionOK.htm"),
+	///    errorURL: new Uri("http://www.example.com/TransactionKO.htm"),
+	///    trackId: new Guid().ToString(),
+	///    currency: 978
+	///    );
+	/// </code>
+	///</example>
 	public sealed class PaymentInitMessage
 	{
+		/// <summary>
+		/// Id for the payment gateway
+		/// </summary>
 		public string Id {get; private set;}
+		
+		/// <summary>
+		/// password for the payment gateway
+		/// </summary>
 		public string Password {get; private set;}
+		
+		/// <summary>
+		/// Action required
+		/// </summary>
 		public RequiredAction RequiredAction{get; private set;}
+		
+		/// <summary>
+		/// Amount of the transaction in the format ###.##
+		/// </summary>
+		/// <seealso cref="Currency"></seealso>
 		public double Amount{get; private set;}
+		
+		/// <summary>
+		/// url where the user will be redirected in case of succesfull
+		/// transaction
+		/// </summary>
 		public Uri ResponseURL{get; private set;}
+		
+		/// <summary>
+		/// trackId
+		/// </summary>
 		public string TrackId{get; private set;}
+		
+		/// <summary>
+		/// User defined field. See the specifications from your payment gateway
+		/// to see if this is used and how
+		/// </summary>
 		public string Udf1{get; private set;}
+
+		/// <summary>
+		/// User defined field. See the specifications from your payment gateway
+		/// to see if this is used and how
+		/// </summary>
 		public string Udf2{get; private set;}
+		
+		/// <summary>
+		/// User defined field. See the specifications from your payment gateway
+		/// to see if this is used and how
+		/// </summary>
 		public string Udf3{get; private set;}
+		
+		/// <summary>
+		/// User defined field. See the specifications from your payment gateway
+		/// to see if this is used and how
+		/// </summary>
 		public string Udf4{get; private set;}
+		
+		/// <summary>
+		/// User defined field. See the specifications from your payment gateway
+		/// to see if this is used and how
+		/// </summary>
 		public string Udf5{get; private set;}
+		
+		/// <summary>
+		/// ISO-4127 currency numeric code
+		/// </summary>
+		/// <seealso cref="Amount"></seealso>
 		public int Currency {get; private set;}
+		
+		/// <summary>
+		/// url where the user will be redirected in case of unsuccesfull
+		/// transaction
+		/// </summary>
 		public Uri ErrorURL {get; private set;}
-		public AcceptedLanguage Language {get; private set;}
-  
+		
+		/// <summary>
+		/// Language required for the payment pages (not all providers may support
+		/// the same languages, so you may need tweaking the RequiredLanguage enum
+		/// to add different languages)
+		/// </summary>
+		/// <seealso cref="e24PaymentPipe.RequiredLanguage"></seealso>
+		public RequiredLanguage Language {get; private set;}
+		
+		/// <summary>
+		/// default constructor for the class, initializes the required properties
+		/// </summary>
+		/// <param name="id"><see cref="Id"></see></param>
+		/// <param name="password"><see cref="Password"></see></param>
+		/// <param name="action"><see cref="Action"></see></param>
+		/// <param name="amount"><see cref="Amount"></see></param>
+		/// <param name="language"><see cref="Language"></see></param>
+		/// <param name="responseURL"><see cref="ResponseURL" /></param>
+		/// <param name="errorURL"><see cref="ErrorURL" /></param>
+		/// <param name="trackId"><see cref="TrackId" /></param>
+		/// <param name="currency"><see cref="Currency" /></param>
+		/// <param name="udf1"><see cref="Udf1" /></param>
+		/// <param name="udf2"><see cref="Udf2" /></param>
+		/// <param name="udf3"><see cref="Udf3" /></param>
+		/// <param name="udf4"><see cref="Udf4" /></param>
+		/// <param name="udf5"><see cref="Udf5" /></param>
 		public PaymentInitMessage(
 			string id,
-		    string password,
-		    RequiredAction action,
-		    double amount,
-		    AcceptedLanguage language,
-		    Uri responseURL,
-		    Uri errorURL,
-		    string trackId,
-		    int currency=978,
-		    string udf1="",
-		    string udf2="",
-		    string udf3="",
-		    string udf4="",
-		    string udf5=""
-		   )
+			string password,
+			RequiredAction action,
+			double amount,
+			RequiredLanguage language,
+			Uri responseURL,
+			Uri errorURL,
+			string trackId,
+			int currency=978,
+			string udf1="",
+			string udf2="",
+			string udf3="",
+			string udf4="",
+			string udf5=""
+		)
 		{
 			this.Id = id;
 			this.Password = password;
@@ -81,6 +223,10 @@ namespace e24PaymentPipe
 			this.Language = language;
 		}
 		
+		/// <summary>
+		/// builds the url parameters to be sent via POST to the payment gateway
+		/// </summary>
+		/// <returns>list of parameters concatenated by &amp;</returns>
 		public string ToUrlParameters() {
 			StringBuilder buf = new StringBuilder();
 			if (this.Id.Length > 0)

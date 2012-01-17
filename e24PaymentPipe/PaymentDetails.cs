@@ -1,25 +1,32 @@
-﻿/*
- * Created by SharpDevelop.
- * User: paolo
- * Date: 10/12/2011
- * Time: 10:50
- */
-using System;
+﻿using System;
 
 namespace e24PaymentPipe
 {
 	/// <summary>
-	/// Description of PaymentDetails.
+	/// PaymentDetails immutable class, wraps the PaymentId and the Payment page
+	/// returned by the payment gateway
 	/// </summary>
 	public sealed class PaymentDetails
 	{
-		public string paymentId {get; private set;}
-	    public string paymentPage{get; private set;}
+		/// <summary>
+		/// Identifier for the requested payment
+		/// </summary>
+		public string PaymentId {get; private set;}
+		
+		/// <summary>
+		/// identifier for the payment page
+		/// </summary>
+	    public string PaymentPage{get; private set;}
 	    
+	    /// <summary>
+	    /// default constructor for the class
+	    /// </summary>
+	    /// <param name="paymentId"><see cref="PaymentId" /></param>
+	    /// <param name="paymentPage"><see cref="PaymentPage" /></param>
 		public PaymentDetails(string paymentId, string paymentPage)
 		{
-			this.paymentId=paymentId;
-			this.paymentPage=paymentPage;
+			this.PaymentId=paymentId;
+			this.PaymentPage=paymentPage;
 		}
 	}
 }

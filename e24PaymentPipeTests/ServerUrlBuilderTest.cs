@@ -20,10 +20,10 @@ namespace e24PaymentPipeTests
 		public void ServerBuildUrl()
 		{
 			var si = new PaymentServerUrlBuilder(
-				WebAddress: "test4.constriv.com",
-				Context: 	"/cg301",
-				SSL:		UseSSL.off,
-				Port:		80);
+				webAddress: "test4.constriv.com",
+				context: 	"/cg301",
+				ssl:		UseSSL.off,
+				port:		80);
 			
 			var url=si.ToUrl();
 			Console.Error.WriteLine(url);

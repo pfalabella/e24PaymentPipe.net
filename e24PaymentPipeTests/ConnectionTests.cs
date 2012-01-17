@@ -13,7 +13,7 @@ namespace e24PaymentPipeTests
 		[SetUp]
         public void SetUp()
         {
-        	var paymentServer = new PaymentServerUrlBuilder("bankserver.example.com","/context", UseSSL.on, 443);
+        	var paymentServer = new PaymentServerUrlBuilder("test4.constriv.com","/cg301", UseSSL.on, 443);
         	paymentServerUrl = paymentServer.ToUrl();
         }
         
@@ -27,11 +27,11 @@ namespace e24PaymentPipeTests
 
 //			// build Payment Init message
 			var init=new PaymentInitMessage(
-			 	id: "yourId",
-			 	password: "yourPassword",
+			 	id: "89025555",
+			 	password: "test",
 			 	action: RequiredAction.Authorization,
 			 	amount: 5.30,
-			 	language: AcceptedLanguage.ITA,
+			 	language: RequiredLanguage.ITA,
 			 	responseURL: new Uri("http://www.example.com/TransactionOK.htm"),
 			 	errorURL: new Uri("http://www.example.com/TransactionKO.htm"),
 			 	trackId: new Guid().ToString(),
@@ -43,7 +43,7 @@ namespace e24PaymentPipeTests
 			PaymentDetails paymentdetails=null;
 			try 
 			{
-				paymentdetails = pipe.performPaymentInitialization(init);
+				paymentdetails = pipe.PerformPaymentInitialization(init);
 			}
 			catch(BadResponseFromWebServiceException ex)
 			{
@@ -52,8 +52,8 @@ namespace e24PaymentPipeTests
 			}
 			
 			Assert.IsNotNull(paymentdetails);
-			Console.Error.WriteLine("paymentID: {0}", paymentdetails.paymentId);
-			Console.Error.WriteLine("paymentpage: {0}", paymentdetails.paymentPage);
+			Console.Error.WriteLine("paymentID: {0}", paymentdetails.PaymentId);
+			Console.Error.WriteLine("paymentpage: {0}", paymentdetails.PaymentPage);
 		}
 	}
 }
