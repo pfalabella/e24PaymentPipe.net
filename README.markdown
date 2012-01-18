@@ -1,7 +1,7 @@
 e24PaymentPipe
 ==============
 
-A .net implementation of the ACI Worldwide Payment Gateway that is used by many payment gateway providers.
+A .net 4.0 implementation of the e24PaymentPipe Payment Gateway that is used by many payment gateway providers.
 
 Quick start
 ------------
@@ -14,7 +14,7 @@ var init=new PaymentInitMessage(
     password: "yourPassword",
     action: RequiredAction.Authorization,
     amount: 5.30,
-    language: AcceptedLanguage.ITA,
+    language: RequiredLanguage.ITA,
     responseURL: new Uri("http://www.example.com/TransactionOK.htm"),
     errorURL: new Uri("http://www.example.com/TransactionKO.htm"),
     trackId: new Guid().ToString(),
